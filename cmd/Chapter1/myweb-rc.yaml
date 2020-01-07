@@ -1,0 +1,20 @@
+kind: ReplicationController
+metadata:
+  name: myweb
+spec:
+  replicas: 1
+  selector:
+    app: myweb
+  template:
+    metadata:
+      labels:
+        app: myweb
+    spec:
+      containers:
+        - name: myweb
+          image: docker.io/kubeguide/tomcat-app:v1
+          ports:
+          - containerPort: 8080
+          env:
+          - name: MYSQL_SERVICE_PORT
+            value: '3306'
